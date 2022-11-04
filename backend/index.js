@@ -4,10 +4,16 @@ import dotenv from "dotenv";
 import cors from "cors";
 dotenv.config();
 import authRouter from "./routes/authRoute.js";
+import tourRouter from "./routes/tourRoute.js";
 
 const app = express();
 app.use(express.json({ extended: true })); // for postman //Used to parse JSON bodies
-app.use(cors()); //Middleware for connect server and react (used for server connection with unknown url)
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions)); //Middleware for connect server and react (used for server connection with unknown url)
 app.use(express.urlencoded({ extended: true })); //for send the data via form //Parse URL-encoded bodies
 //app.use(cookieParser()); //  for Set, Get Cookies
 
@@ -18,6 +24,7 @@ mongoose
   .catch((error) => console.log(error));
 
 app.use("/api/auth", authRouter);
+app.use("/api/tour", tourRouter);
 
 // Error Handler Middleware in express
 //app.use(errorHandlar);

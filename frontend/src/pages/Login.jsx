@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/features/authSlice";
 import { useEffect } from "react";
+import Navigation from "../components/Navigation";
 
 const Login = () => {
   const [formValue, setFormValue] = useState({
@@ -32,6 +33,7 @@ const Login = () => {
 
   return (
     <>
+      <Navigation />
       <div className="login-page bg-light">
         <div className="container">
           <div className="row">
