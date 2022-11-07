@@ -19,7 +19,7 @@ const tourSchema = new Schema(
       type: [String],
     },
     image: {
-      type: String,
+      type: {},
     },
     likeCount: {
       type: Number,

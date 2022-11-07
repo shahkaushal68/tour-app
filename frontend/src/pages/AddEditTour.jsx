@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navigation from "../components/Navigation";
 //import { WithContext as ReactTags } from "react-tag-input";
-import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createTour } from "../redux/features/tourSlice";
@@ -11,15 +10,33 @@ const AddEditTour = () => {
   const [tourData, setTourData] = useState({
     title: "",
     description: "",
+    image: "",
   });
   const [tags, setTags] = useState([]);
+  //const [image, setImage] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { error, message } = useSelector((state) => state.tour);
+  const { user } = useSelector((state) => state.auth);
 
-  const formData = {
-    ...tourData,
-    tags,
-  };
+  //console.log("error", userName);
+  const formData = new FormData();
+  formData.append("title", tourData.title);
+  formData.append("description", tourData.description);
+  formData.append("image", tourData.image);
+  formData.append("tags", tags);
+  formData.append("userName", user?.userName);
+
+  //console.log("tourdata", tourData);
+  //const formData = {
+  // ...tourData,
+  // tags,
+  // userName: user?.userName,
+  //};
+
+  useEffect(() => {
+    error && toast.error(message);
+  }, [error, message]);
 
   const handleChange = (e) => {
     setTourData({
@@ -32,17 +49,14 @@ const AddEditTour = () => {
     e.preventDefault();
     console.log("formData", formData);
     dispatch(createTour({ formData, toast, navigate }));
-    setTourData({
-      title: "",
-      description: "",
-    });
-    setTags([]);
+    //handleClear();
   };
 
   const handleClear = () => {
     setTourData({
       title: "",
       description: "",
+      image: "",
     });
     setTags([]);
   };
@@ -122,11 +136,10 @@ const AddEditTour = () => {
                 <div className="form-group">
                   <label className="control-label">Add Image</label>
                   <div className="col-sm-10">
-                    <FileBase
+                    <input
                       type="file"
-                      multiple={false}
-                      onDone={({ base64 }) =>
-                        setTourData({ ...tourData, image: base64 })
+                      onChange={(e) =>
+                        setTourData({ ...tourData, image: e.target.files[0] })
                       }
                     />
                   </div>

@@ -1,19 +1,22 @@
 import Tour from "../models/tourModel.js";
 
 export const addTour = async (req, res) => {
-  const { title, description, name, creator, tags, image, likeCount } =
-    req.body;
+  //console.log("req-user", req);
+  const imageData = {
+    fileName: req.file.filename,
+    filePath: req.file.path,
+    fileType: req.file.type,
+    fileSize: req.file.size,
+  };
   try {
+    //if (!req.body.title) return res.status(500).json("Title is required");
     const result = await new Tour({
-      title,
-      description,
-      name,
-      creator,
-      tags,
-      image,
-      likeCount,
+      ...req.body,
+      image: imageData,
+      creator: req.user.id,
     }).save();
     res.status(200).json(result);
+    //.log("req.body", { ...req.body, creator: req.user.id });
   } catch (error) {
     res.status(500).json(error);
     console.log("Add tour error", error);

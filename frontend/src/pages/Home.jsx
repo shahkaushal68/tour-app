@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Navigation from "../components/Navigation";
+import TourCard from "../components/TourCard";
+import { viewAllTours } from "../redux/features/tourSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { loading, tours } = useSelector((state) => state.tour);
+
+  //.log("allTours", tours);
+
+  useEffect(() => {
+    dispatch(viewAllTours());
+  }, [dispatch]);
+  //console.log("tours", tours.length);
   return (
     <>
       <Navigation />
@@ -24,6 +36,40 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="tour-listing-section">
+        <div className="tour-title">
+          <h5>Here Lists of All Tours</h5>
+        </div>
+        {loading ? (
+          <h2>Loading...</h2>
+        ) : (
+          <div className="container grid-container">
+            <div className="row">
+              {tours.length > 0 ? (
+                tours.map((tour, index) => {
+                  //console.log("tour", tour);
+                  const { _id, title, tags, description, userName, image } =
+                    tour;
+                  return (
+                    <TourCard
+                      key={index}
+                      id={_id}
+                      title={title}
+                      tags={tags}
+                      description={description}
+                      author={userName}
+                      image={image}
+                    />
+                  );
+                })
+              ) : (
+                <h3>No Tours Found</h3>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
