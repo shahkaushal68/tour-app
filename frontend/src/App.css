@@ -12,7 +12,13 @@ a {
 .form-right i {
   font-size: 100px;
 }
-
+.tour-listing-section {
+  margin-top: 20px;
+}
+.no-data {
+  margin: 20% 0;
+  text-align: center;
+}
 /*--------------Navigation------------*/
 .dropdown-toggle::after {
   display: none;
@@ -73,4 +79,183 @@ text-decoration: none!important;
   padding: .5em 0;
   border: none;
   outline: none;
+}
+
+/*------------------Single Tour------------------------*/
+
+
+
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background-color: #0061a0;
+  z-index: 2;
+  width: 0%;
+  transition: all 0.3s linear;
+}
+.wrapper{
+  margin-top: 20px;
+}
+.content .poster {
+  width: 100%;
+  height: 350px;
+  display: grid;
+  border-radius: 10px;
+  margin-top: 40px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0px 4px 100px -3px #00059733;
+}
+.content .poster .poster-title {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  width: 40%;
+}
+.content .poster .poster-title h1 {
+  font-size: 40px;
+  color: white;
+  font-weight: 300;
+  margin: 20px 0;
+}
+.content .poster .poster-title .line {
+  background-color: #b4c4c5;
+  width: 100%;
+  height: 1px;
+}
+.content .poster .poster-title p {
+  color: #b4c4c5;
+  font-size: 12px;
+  line-height: 1.8em;
+}
+.content .poster .poster-buttons {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 100px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  color: white;
+  text-align: center;
+}
+.content .poster .poster-buttons div {
+  cursor: pointer;
+}
+.content .poster .poster-buttons div:hover {
+  color: #ccc;
+}
+.info {
+  border-radius: 10px;
+  border: 1px solid #e9e9f6;
+  padding: 20px;
+  display: flex;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 40px auto;
+  background-color: #fdfdfd;
+  overflow: hidden;
+  gap: 50px;
+}
+.info .block {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 300;
+  color: #242e47;
+}
+.info .block .mini-title {
+  font-size: 12px;
+  color: #999999;
+  font-weight: 700;
+}
+
+.words {
+  padding: 0 0 0 45px;
+  position: relative;
+}
+.words p {
+  margin: 20px auto;
+  position: relative;
+  color: #777;
+}
+
+.words .buttons {
+  position: absolute;
+  opacity: 0;
+  top: 0px;
+  right: -30px;
+  font-size: 20px;
+  transition: all 0.3s linear;
+  cursor: pointer;
+}
+img.coin {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.action-icons span{
+  cursor: pointer;
+}
+.spinner-section {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+}
+.imageDisplay img {
+  width: 80px;
+  height: 80px;
+}
+.imageDisplay img {
+  width: 80px;
+  height: 80px;
+}
+.pageNot-found img {
+  width: 100%;
+  height: 95vh;
+}
+.search-section .input-group{
+  margin: 0 auto;
+  width: 50%;
+}
+span#basic-addon2 {
+  cursor: pointer;
+}
+img.card-img-top {
+  max-height: 250px;
+}
+p.card-tags {
+  margin-bottom: 0;
+  padding: 0 1rem;
+  /* color: lightslategrey; */
+}
+.card-block {
+  margin: 0.5rem 0;
+}
+@media (max-width: 700px) {
+  .content {
+    width: 90%;
+  }
+
+  .info {
+    grid-template-columns: repeat(2, 1fr);
+    height: 120px;
+  }
+
+  .content .poster {
+    height: 250px;
+  }
+
+  .content .poster .poster-title h1 {
+    font-size: 25px;
+  }
+  .content .poster .poster-title p, .content .poster .poster-title .line {
+    display: none;
+  }
+
+  .quote {
+    font-size: 16px;
+  }
+  .quote .letter {
+    left: 0px;
+  }
 }

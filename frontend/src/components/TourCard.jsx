@@ -10,13 +10,29 @@ const TourCard = ({ id, title, tags, description, author, image }) => {
   };
 
   return (
-    <div className="col-12 col-md-6 col-lg-4">
+    <div className="col-12 col-md-6 col-lg-4 card-block">
       <div className="card">
-        <img
-          className="card-img-top"
-          src={`http://localhost:4000/${image?.filePath}`}
-          alt="Card cap"
-        />
+        {image ? (
+          <img
+            className="card-img-top"
+            src={`${process.env.REACT_APP_BASE_URL}/${image?.filePath}`}
+            alt="Card cap"
+          />
+        ) : (
+          <img
+            className="card-img-top"
+            src="/images/no-image.jpg"
+            alt="No-available"
+          />
+        )}
+        <p className="card-tags">
+          Tags:- &nbsp;
+          {tags.map((tag, index) => (
+            <>
+              <span key={index}>{tag}</span>,&nbsp;
+            </>
+          ))}
+        </p>
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
           <p className="card-text">

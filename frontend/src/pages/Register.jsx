@@ -14,11 +14,15 @@ const Register = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isError, message } = useSelector((state) => state.auth);
+  const { isError, message, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     isError && toast.error(message);
   }, [isError, message]);
+
+  useEffect(() => {
+    user && navigate("/");
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     setFormValue({

@@ -7,6 +7,11 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setUser } from "./redux/features/authSlice";
 import AddEditTour from "./pages/AddEditTour";
+import TourDetail from "./pages/TourDetail";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoutes from "./utils/PrivateRoutes";
+import UpdateTour from "./pages/UpdateTour";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -23,8 +28,14 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/addTour" element={<AddEditTour />} />
-          <Route path="/editTour/:id" element={<AddEditTour />} />
+          <Route path="/tour/sreach" element={<Home />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="/addTour" element={<AddEditTour />} />
+            <Route path="/editTour/:id" element={<UpdateTour />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+          <Route path="/view/:id" element={<TourDetail />} />
+          <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

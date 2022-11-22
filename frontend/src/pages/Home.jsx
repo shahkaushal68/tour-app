@@ -1,13 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+
 import Navigation from "../components/Navigation";
+import PageHeading from "../components/PageHeading";
+import Spinner from "../components/Spinner";
 import TourCard from "../components/TourCard";
-import { viewAllTours } from "../redux/features/tourSlice";
+import { searchTours, viewAllTours } from "../redux/features/tourSlice";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loading, tours } = useSelector((state) => state.tour);
+  const [searchTour, setSearchTour] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTour) {
+      dispatch(searchTours(searchTour));
+      navigate(`/tour/search?searchQuery=${searchTour}`);
+      setSearchTour("");
+    }
+    //alert(searchTour);
+  };
 
   //.log("allTours", tours);
 
@@ -18,35 +33,33 @@ const Home = () => {
   return (
     <>
       <Navigation />
-      <div className="py-5 text-center text-white bg-primary">
-        <div className="container py-5">
-          <div className="row py-5">
-            <div className="mx-auto col-lg-10">
-              <h1 className="display-4 mb-4 ">
-                This is a beautiful Bootstrap 4 Navbar with Social Media Icons
-              </h1>
-              <p className="lead mb-5">
-                There is nothing more rare, nor more beautiful, than a woman
-                being unapologetically herself; comfortable in her perfect
-                imperfection. To me, that is the true essence of beauty.
-              </p>
-              <Link to="#" className="btn btn-lg btn-outline-light mx-1">
-                Take me there
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PageHeading heading="List of All Tours" />
 
       <div className="tour-listing-section">
-        <div className="tour-title">
-          <h5>Here Lists of All Tours</h5>
-        </div>
         {loading ? (
-          <h2>Loading...</h2>
+          <Spinner />
         ) : (
           <div className="container grid-container">
             <div className="row">
+              <div className="search-section col-md-12">
+                <div className="input-group mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search Tour..."
+                    value={searchTour}
+                    onChange={(e) => setSearchTour(e.target.value)}
+                  />
+                  <span
+                    onClick={handleSearch}
+                    className="input-group-text"
+                    id="basic-addon2"
+                  >
+                    Search
+                  </span>
+                </div>
+              </div>
+
               {tours.length > 0 ? (
                 tours.map((tour, index) => {
                   //console.log("tour", tour);

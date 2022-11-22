@@ -19,6 +19,6 @@ export const verifyToken = (req, res, next) => {
     });
   } else {
     // Forbidden
-    res.status(403).json("Token isnot defined");
+    res.status(403).json("Token is not defined");
   }
 };

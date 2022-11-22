@@ -12,6 +12,7 @@ const Navigation = () => {
   };
 
   const { user } = useSelector((state) => state.auth);
+
   const handleLogout = () => {
     dispatch(logoutUser());
   };
@@ -47,7 +48,7 @@ const Navigation = () => {
             {user?.token && (
               <>
                 <li className="nav-item px-lg-2">
-                  <Link className="nav-link" to="#">
+                  <Link className="nav-link" to="/dashboard">
                     <span className="d-inline-block d-lg-none icon-width">
                       <i className="far fa-user"></i>
                     </span>

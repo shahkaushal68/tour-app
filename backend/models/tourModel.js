@@ -5,6 +5,7 @@ const tourSchema = new Schema(
   {
     title: {
       type: String,
+      required: true,
     },
     description: {
       type: String,
@@ -16,7 +17,7 @@ const tourSchema = new Schema(
       type: String,
     },
     tags: {
-      type: [String],
+      type: [],
     },
     image: {
       type: {},

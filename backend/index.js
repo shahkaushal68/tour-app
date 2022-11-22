@@ -2,8 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-//import path from "path";
-//const __dirname = path.resolve();
+import path from "path";
+const __dirname = path.resolve();
 dotenv.config();
 import authRouter from "./routes/authRoute.js";
 import tourRouter from "./routes/tourRoute.js";
@@ -18,8 +18,8 @@ const corsOptions = {
 app.use(cors(corsOptions)); //Middleware for connect server and react (used for server connection with unknown url)
 app.use(express.urlencoded({ extended: true })); //for send the data via form //Parse URL-encoded bodies
 //app.use(cookieParser()); //  for Set, Get Cookies
-app.use("/upload", express.static("upload"));
-//app.use("/upload", express.static(path.join(__dirname, "upload")));
+//app.use("/upload", express.static("upload"));
+app.use("/upload", express.static(path.join(__dirname, "upload")));
 
 const port = 4000;
 mongoose
