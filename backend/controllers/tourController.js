@@ -43,7 +43,7 @@ export const getAllTours = async (req, res) => {
 
 export const getSingleTour = async (req, res) => {
   try {
-    //console.log("id", req.params);
+    console.log("id", req.params);
     const singleTour = await Tour.findById(req.params.id);
     res.status(200).json(singleTour);
   } catch (error) {
@@ -126,7 +126,19 @@ export const getToursBySearch = async (req, res) => {
     const tours = await Tour.find({ title: title });
     res.status(200).json(tours);
   } catch (error) {
-    console.log("search Tour Error", error);
+    //console.log("search Tour Error", error);
+    res.status(500).json(error);
+  }
+};
+
+export const getToursBasedOnTag = async (req, res) => {
+  try {
+    //console.log("req", req.params);
+    //const {tag} = req.params
+    const response = await Tour.find({ tags: req.params.tag });
+    res.status(200).json(response);
+  } catch (error) {
+    console.log("Tag Tours Error", error);
     res.status(500).json(error);
   }
 };

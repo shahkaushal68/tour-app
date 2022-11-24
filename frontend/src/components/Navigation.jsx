@@ -2,16 +2,25 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../redux/features/authSlice";
+import jwt_decode from "jwt-decode";
 
 const Navigation = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  const token = user?.token;
+
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    if (decodedToken.exp * 1000 < new Date().getTime()) {
+      dispatch(logoutUser());
+    }
+  }
 
   const handleMobileMenu = () => {
     setMobileMenu((preVal) => !preVal);
   };
-
-  const { user } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
     dispatch(logoutUser());

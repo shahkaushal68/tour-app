@@ -8,6 +8,7 @@ const TourCard = ({ id, title, tags, description, author, image }) => {
     }
     return str;
   };
+  var arrayTags = tags.toString().split(",");
 
   return (
     <div className="col-12 col-md-6 col-lg-4 card-block">
@@ -25,11 +26,11 @@ const TourCard = ({ id, title, tags, description, author, image }) => {
             alt="No-available"
           />
         )}
+
         <p className="card-tags">
-          Tags:- &nbsp;
-          {tags.map((tag, index) => (
+          {arrayTags.map((tag, index) => (
             <>
-              <span key={index}>{tag}</span>,&nbsp;
+              <span key={index}>#{tag}</span>&nbsp;
             </>
           ))}
         </p>
@@ -40,14 +41,7 @@ const TourCard = ({ id, title, tags, description, author, image }) => {
             &nbsp;
             <Link to={`/view/${id}`}>Read More</Link>
           </p>
-          <p className="card-tags">
-            Tags:- &nbsp;
-            {tags.map((tag, index) => (
-              <>
-                <span key={index}>{tag}</span>,&nbsp;
-              </>
-            ))}
-          </p>
+
           <p className="card-tags">
             Author:- &nbsp;
             <span>{author}</span>

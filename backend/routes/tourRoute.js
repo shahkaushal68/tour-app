@@ -4,6 +4,7 @@ import {
   deleteTour,
   getAllTours,
   getSingleTour,
+  getToursBasedOnTag,
   getToursByLoginUser,
   getToursBySearch,
   updateTour,
@@ -16,6 +17,7 @@ router.get("/", getAllTours);
 router.get("/:id", getSingleTour);
 router.delete("/:id", deleteTour);
 router.get("/search?searchQuery", getToursBySearch);
+router.get("/tag/:tag", getToursBasedOnTag);
 
 router.put("/updateTour/:id", verifyToken, upload.single("image"), updateTour);
 router.get("/userTours/:id", verifyToken, getToursByLoginUser);

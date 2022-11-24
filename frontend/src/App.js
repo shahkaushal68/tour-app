@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import UpdateTour from "./pages/UpdateTour";
 import PageNotFound from "./pages/PageNotFound";
+import TagTours from "./pages/TagTours";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -35,6 +36,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
           <Route path="/view/:id" element={<TourDetail />} />
+          <Route path="/tour/tag/:tag" element={<TagTours />} />
           <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>

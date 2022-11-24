@@ -10,18 +10,11 @@ import tourRouter from "./routes/tourRoute.js";
 
 const app = express();
 app.use(express.json({ extended: true })); // for postman //Used to parse JSON bodies
-const corsOptions = {
-  origin: "http://localhost:3000",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions)); //Middleware for connect server and react (used for server connection with unknown url)
+app.use(cors()); //Middleware for connect server and react (used for server connection with unknown url)
 app.use(express.urlencoded({ extended: true })); //for send the data via form //Parse URL-encoded bodies
-//app.use(cookieParser()); //  for Set, Get Cookies
-//app.use("/upload", express.static("upload"));
 app.use("/upload", express.static(path.join(__dirname, "upload")));
 
-const port = 4000;
+const port = process.env.PORT || 4000;
 mongoose
   .connect(process.env.DB_URI)
   .then(console.log("Connection Successfully"))
